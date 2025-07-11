@@ -1,21 +1,22 @@
-def partition(array, low, high):
+import random
 
-    # choose the rightmost element as pivot
-    pivot = array[high]
-
-    # pointer for greater element
-    i = low - 1
+def partition(arr, low, high):
+    # random pivot
+    pivot_index = random.randint(low, high)
+    arr[pivot_index], arr[high] = arr[high], arr[pivot_index]
+    pivot = arr[high]
+    i = low
     for j in range(low, high):
-        if array[j] <= pivot:
-            i = i + 1
-            (array[i], array[j]) = (array[j], array[i])
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+    arr[i], arr[high] = arr[high], arr[i]
+    return i
 
-    (array[i + 1], array[high]) = (array[high], array[i + 1])
-    return i + 1
-
-
-def quickSort(array, low, high):
+def quickSort(arr, low=0, high=None):
+    if high is None:
+        high = len(arr)-1
     if low < high:
-        pi = partition(array, low, high)
-        quickSort(array, low, pi - 1)
-        quickSort(array, pi + 1, high)
+        p = partition(arr, low, high)
+        quickSort(arr, low, p-1)
+        quickSort(arr, p+1, high)
