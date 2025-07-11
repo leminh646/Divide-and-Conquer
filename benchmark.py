@@ -25,7 +25,7 @@ def measure(func, data):
     elapsed = time.perf_counter() - start_time
     return elapsed, peak / 1024**2  # seconds, peak MB
 
-def run_trials(alg_name, func, sizes, orders, trials=3):
+def run_trials(alg_name, func, sizes, orders, trials=1):
     rows = []
     for n in sizes:
         for order in orders:
